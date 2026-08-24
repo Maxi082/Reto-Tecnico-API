@@ -1,5 +1,5 @@
 function fn() {
-  var env = karate.env; // valor de -Dkarate.env, ej: 'dev', 'qa'
+  var env = karate.env;
   if (!env) {
     env = 'dev';
   }
@@ -13,14 +13,12 @@ function fn() {
   if (env === 'dev') {
     config.baseUrl = 'https://serverest.dev';
   } else if (env === 'qa') {
-    config.baseUrl = 'https://serverest.dev';
+    config.baseUrl = 'https://serverest.qa';
   }
 
-  // Timeouts globales
   karate.configure('connectTimeout', 10000);
   karate.configure('readTimeout', 10000);
 
-  // Log del payload/respuesta solo cuando falla, para no ensuciar la consola
   karate.configure('logPrettyRequest', true);
   karate.configure('logPrettyResponse', true);
 

@@ -5,12 +5,10 @@ Para mantener la base de datos de usuarios al día
 
   Background:
     * url baseUrl
-    # Asegúrate de que este esquema soporte el campo '_id' generado por la API
     * def usuarioSchema = read('classpath:usuarios/schemas/usuario-schema.js')
 
   @smoke @positivo
   Scenario: Actualizar los datos de un usuario existente
-    # 1. Crear el usuario base
     * def usuarioOriginal = call read('classpath:usuarios/utils/gerar-usuario.js')
     Given path '/usuarios'
     And request usuarioOriginal
@@ -19,12 +17,10 @@ Para mantener la base de datos de usuarios al día
     * def usuarioId = response._id
     * def correoOriginal = usuarioOriginal.email
 
-    # 2. Preparar los datos de actualización manteniendo el correo o modificándolo con control
     * def usuarioActualizado = call read('classpath:usuarios/utils/gerar-usuario.js')
     * set usuarioActualizado.nome = 'Nombre Actualizado QA'
     * set usuarioActualizado.email = correoOriginal
 
-    # 3. Enviar la actualización al endpoint PUT
     Given path '/usuarios', usuarioId
     And request usuarioActualizado
     When method PUT

@@ -1,8 +1,8 @@
 # ServeRest API Tests — Karate DSL
 
-Suite de pruebas automatizadas para la API de Usuarios de [ServeRest](https://serverest.dev/), construida con [Karate DSL](https://karatelabs.github.io/karate/).
+Suite de pruebas automatizadas para la API de Usuarios de ServeRest, construida con Karate DSL.
 
-## 🧰 Stack técnico
+ stack técnico
 
 | Herramienta | Versión | Uso |
 |---|---|---|
@@ -12,7 +12,7 @@ Suite de pruebas automatizadas para la API de Usuarios de [ServeRest](https://se
 | Java | 11+ | Runtime |
 | cucumber-reporting | 5.8.1 | Reportes HTML enriquecidos |
 
-## 📁 Estructura del proyecto
+ Estructura del proyecto
 
 ```
 serverest-api-tests/
@@ -37,13 +37,13 @@ serverest-api-tests/
             └── gerar-usuario.js          # Generador de datos de prueba únicos
 ```
 
-## ✅ Requisitos previos
+ Requisitos previos
 
 - Java JDK 11 o superior instalado (`java -version`)
 - Maven 3.8+ instalado (`mvn -version`)
 - Conexión a internet (la suite corre contra `https://serverest.dev`, no requiere mocks)
 
-## 🚀 Instalación
+ Instalación
 
 ```bash
 git clone <url-del-repositorio>
@@ -51,7 +51,7 @@ cd serverest-api-tests
 mvn clean install -DskipTests
 ```
 
-## ▶️ Ejecución de las pruebas
+ Ejecución de las pruebas
 
 **Ejecutar toda la suite:**
 ```bash
@@ -78,29 +78,9 @@ mvn test -Dkarate.env=qa
 mvn test -Dkarate.options="--tags @negativo"
 ```
 
-## 📊 Reportes
+ Reportes
 
 Karate genera un reporte HTML nativo en:
 ```
 target/karate-reports/karate-summary.html
 ```
-
-Ábrelo directamente en el navegador después de correr `mvn test`.
-
-## 🧪 Qué cubre la suite
-
-| Endpoint | Casos positivos | Casos negativos |
-|---|---|---|
-| `GET /usuarios` | Listado completo, filtro por email existente | Filtro por email inexistente (lista vacía) |
-| `POST /usuarios` | Alta con datos válidos, alta como admin/no-admin | Email duplicado, campos obligatorios faltantes (nome, email, password, administrador), email con formato inválido |
-| `GET /usuarios/{_id}` | Búsqueda de usuario existente | Búsqueda con ID inexistente |
-| `PUT /usuarios/{_id}` | Actualización exitosa, upsert sobre ID inexistente | Actualización con email ya usado por otro usuario |
-| `DELETE /usuarios/{_id}` | Eliminación exitosa (con verificación posterior) | Eliminación de ID inexistente |
-
-Todas las respuestas se validan contra un **JSON schema** (`usuario-schema.js`) para asegurar tipos y presencia de campos, no solo valores puntuales.
-
-## 🔑 Notas sobre la API
-
-- Los endpoints de `/usuarios` en ServeRest **no requieren autenticación** (a diferencia de `/produtos`), por lo que la suite no maneja tokens.
-- El email es un campo único: por eso `gerar-usuario.js` genera un sufijo basado en timestamp + número aleatorio en cada ejecución, evitando colisiones entre corridas.
-- Cada escenario es independiente: crea sus propios datos de prueba (patrón *self-contained scenario*) para poder ejecutarse en paralelo o en cualquier orden sin depender de estado previo.

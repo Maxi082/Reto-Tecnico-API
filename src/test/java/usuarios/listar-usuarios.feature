@@ -16,7 +16,6 @@ Feature: Listar usuarios
 
   @positivo
   Scenario: Filtrar usuarios por email existente
-    # Se crea un usuario para garantizar que el filtro tenga al menos un resultado
     * def nuevoUsuario = call read('classpath:usuarios/utils/gerar-usuario.js')
     Given path '/usuarios'
     And request nuevoUsuario

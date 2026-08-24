@@ -20,7 +20,6 @@ Feature: Eliminar usuario
     Then status 200
     And match response.message == 'Registro excluído com sucesso'
 
-    # Verificamos que ya no exista
     Given path '/usuarios', usuarioId
     When method GET
     Then status 400

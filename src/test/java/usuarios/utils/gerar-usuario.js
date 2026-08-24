@@ -1,11 +1,4 @@
-/**
- * Helper para generar datos de prueba de usuarios de forma dinámica.
- * Evita colisiones de email (unique constraint de la API) usando
- * un timestamp + número aleatorio como sufijo.
- *
- * Uso dentro de un .feature:
- *   * def usuarioAleatorio = call read('classpath:usuarios/utils/gerar-usuario.js')
- */
+
 function fn(args) {
   args = args || {};
 

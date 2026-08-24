@@ -17,7 +17,6 @@ Feature: Registrar usuario
     And match response == { message: '#string', _id: '#string' }
     And def usuarioId = response._id
 
-    # Verificamos que el usuario efectivamente exista y respete el schema
     Given path '/usuarios', usuarioId
     When method GET
     Then status 200
@@ -47,7 +46,6 @@ Feature: Registrar usuario
     When method POST
     Then status 201
 
-    # Segundo intento con el mismo email
     Given path '/usuarios'
     And request usuarioBase
     When method POST
